@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="employee-management-portal-suite.xml" />
+	<munit:test name="get:\Employees\(id):employee-management-portal-config-test" doc:id="729c9e06-7b01-4d89-9e53-f15d693e0f3b" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Consume" doc:id="5b4906ba-c56f-4009-977c-b81aecf6d3ce" processor="wsc:consume">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="751115eb-f804-46e1-bcd4-de312308e9e6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java  --- readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\mock_payload.dwl')]" mediaType="application/java " encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="id" value="#[output application/java --- readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:spy doc:name="Spy Transform Message" doc:id="568267df-67b4-4039-b938-6febc0d59f48" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="378ce0ff-9d7a-46d3-a41a-f55304cc28b6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="e9d21dac-4ff1-409c-ad5f-e28f38d62196" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest::spy_assert_payload
+---
+spy_assert_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="6e4c0f73-e520-40c1-9f37-a2cab16dbcbe" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest::spy_assert_payload1
+---
+spy_assert_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit:set-event doc:name="Set Input" doc:id="81433fa9-e92c-4741-99af-a59bbae9ac48" >
+				<munit:payload value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\Employees\(id):employee-management-portal-config" doc:id="a0f53707-18f2-4fb2-88bf-e3d2ddc9ccf9" name="get:\Employees\(id):employee-management-portal-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="2fc2a9c1-338d-4c4d-b750-69269c44ecb8" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="ba054ec5-a88a-450a-8846-1fdf34b7cc5a" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="232a7856-7d98-4fc5-8ef0-a4ec13885209" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="990b0848-d7b8-4e1e-b2ca-63d3e49e8c47" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3b133689-37e6-44ec-8893-3d367a5760cd" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="51a98564-5ecd-42de-894d-f5843ca70116" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="378ce0ff-9d7a-46d3-a41a-f55304cc28b6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\Employees\(id):employee-management-portal-config-test1" doc:id="83e2d696-4971-4b75-b9fa-d318fd959912" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Consume" doc:id="369485f6-85a3-40cd-b531-b79e20422c5d" processor="wsc:consume">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="751115eb-f804-46e1-bcd4-de312308e9e6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java  --- readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\mock_payload.dwl')]" mediaType="application/java " encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\mock_variable_.dwl')]" />
+						<munit-tools:variable key="id" value="#[output application/java --- readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:spy doc:name="Spy Transform Message" doc:id="185f27c9-88c9-499c-a427-c18010f360a4" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3b133689-37e6-44ec-8893-3d367a5760cd" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="bdda3c74-e39c-4749-8d23-2d3a99e20cd2" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest1::spy_assert_payload
+---
+spy_assert_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="f054716c-6a4a-4aa2-8e96-eec84ff6d782" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest1::spy_assert_payload1
+---
+spy_assert_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit:set-event doc:name="Set Input" doc:id="3348c52e-fd2f-4f08-a17f-c5465bc41564" >
+				<munit:payload value="#[output application/json  --- readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json " />
+				<munit:attributes value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesidemployeemanagementportalconfigtest1\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\Employees\(id):employee-management-portal-config" doc:id="36f67694-f582-4811-9495-980aade4bc5a" name="get:\Employees\(id):employee-management-portal-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="d4f6b763-48ca-46ea-9914-14689f9b399f" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesidemployeemanagementportalconfigtest1::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="4b1bba85-e869-44ed-9278-49c30329159b" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="232a7856-7d98-4fc5-8ef0-a4ec13885209" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="5dd19d9d-097b-4b4e-aa88-43431417f921" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="378ce0ff-9d7a-46d3-a41a-f55304cc28b6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="7976a07a-18a4-477f-a4b2-6141473f4d5a" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3b133689-37e6-44ec-8893-3d367a5760cd" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\Employees:employee-management-portal-config-test" doc:id="4f1d0718-bc34-44ab-93a9-c301d89acf5c" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Consume" doc:id="0697df53-dc4b-4b5d-a33a-c793a4f0984b" processor="wsc:consume">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="28c647e6-2311-4f16-bb8a-936d6d0fcb68" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java  --- readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\mock_payload.dwl')]" mediaType="application/java " encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:spy doc:name="Spy Transform Message" doc:id="ed5881c6-22d9-4b43-856d-6e3ebc49e0ac" processor="ee:transform">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d4b2a2ae-ec07-4eda-be05-ba1c67292c2b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="dc82a630-4e2d-4a7e-b5fb-7afbb8fe0999" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesemployeemanagementportalconfigtest::spy_assert_payload2
+---
+spy_assert_payload2::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="72a03582-b4a4-4e65-bf46-e337652d4742" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesemployeemanagementportalconfigtest::spy_assert_payload3
+---
+spy_assert_payload3::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit:set-event doc:name="Set Input" doc:id="7e17b03a-f64e-425f-92e7-fbb0ce878c6d" >
+				<munit:payload value="#[output application/json  --- readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\set-event_payload1.dwl')]" encoding="UTF-8" mediaType="application/json " />
+				<munit:attributes value="#[readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\set-event_attributes1.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getEmployeesemployeemanagementportalconfigtest\set-event_variable_1.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\Employees:employee-management-portal-config" doc:id="ccc553c5-c348-49e8-af33-f2f3a834edd1" name="get:\Employees:employee-management-portal-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="6b994719-9d56-437e-b692-4b455a273fff" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getEmployeesemployeemanagementportalconfigtest::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="807353b2-b52e-479b-b74d-ad08cc13b9ad" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="57810961-c1e8-4021-82fc-f77a412efe00" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="5f98bc9f-5b05-4842-b00f-a39f8e8d863c" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d4b2a2ae-ec07-4eda-be05-ba1c67292c2b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
